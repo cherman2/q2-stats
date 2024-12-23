@@ -17,8 +17,6 @@ setup(
     package_data={
         'q2_stats': ['citations.bib'],
         'q2_stats.plots': ['specs/*'],
-        'q2_stats.tests': ['data/*', 'data/faithpd_timedist/*',
-                           'data/faithpd_refdist/*', 'data/empty_data_dist/*'],
     },
     author='Liz Gehret',
     author_email='elizabeth.gehret@nau.edu',

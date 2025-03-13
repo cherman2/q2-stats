@@ -64,7 +64,7 @@ def plot_rainclouds(output_dir: str, data: pd.DataFrame,
     records = json.loads(data.to_json(orient='records'))
 
     if 'class' in data.columns:
-        spec = importlib.resources.open_text('q2_stats.plots.specs', 
+        spec = importlib.resources.open_text('q2_stats.plots.specs',
                                              'raincloud_multi.json')
         selection_opts = []
         selection_labels = []

@@ -6,10 +6,11 @@
 # The full license is in the file LICENSE, distributed with this software.
 # ----------------------------------------------------------------------------
 
+import importlib.resources
 import os
 import itertools
 from functools import cache
-import pkg_resources
+import importlib
 
 import numpy as np
 import pandas as pd
@@ -72,8 +73,7 @@ def synth_o_m_factory():
 
 
 def _get_data_from_tests(path):
-    return pkg_resources.resource_filename('q2_stats.tests',
-                                           os.path.join('data', path))
+    return importlib.resources.files('q2_stats.tests.data') / path
 
 
 def faithpd_timedist_factory():

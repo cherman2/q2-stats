@@ -6,8 +6,9 @@
 # The full license is in the file LICENSE, distributed with this software.
 # ----------------------------------------------------------------------------
 
+import importlib.resources
 import os
-import pkg_resources
+import importlib
 import jinja2
 import json
 import pandas as pd
@@ -64,8 +65,8 @@ def plot_rainclouds(output_dir: str, data: pd.DataFrame,
     records = json.loads(data.to_json(orient='records'))
 
     if 'class' in data.columns:
-        spec_fp = pkg_resources.resource_filename(
-            'q2_stats.plots', os.path.join('specs', 'raincloud_multi.json'))
+        spec = importlib.resources.open_text('q2_stats.plots.specs', 
+                                             'raincloud_multi.json')
         selection_opts = []
         selection_labels = []
         for cls in data['class'].unique():
@@ -82,10 +83,9 @@ def plot_rainclouds(output_dir: str, data: pd.DataFrame,
             'selection_opts': selection_opts
         })
     else:
-        spec_fp = pkg_resources.resource_filename(
-            'q2_stats.plots', os.path.join('specs', 'raincloud_single.json'))
-
-    with open(spec_fp) as fh:
+        spec = importlib.resources.open_text('q2_stats.plots.specs',
+                                             'raincloud_single.json')
+    with spec as fh:
         json_obj = json.load(fh)
 
     full_spec = json_replace(json_obj,

@@ -5,14 +5,15 @@
 #
 # The full license is in the file LICENSE, distributed with this software.
 # ----------------------------------------------------------------------------
-
-import importlib
-
 from qiime2.plugin import (
     Str, Plugin, Choices, Bool, Metadata, List, TypeMap, TypeMatch,
     Collection, Visualization, Citations)
 
 from q2_types.sample_data import SampleData, AlphaDiversity
+from q2_types.tabular import (
+    StatsTable, Pairwise, Dist1D, Multi, Matched, Independent, Ordered,
+    NestedOrdered, Unordered, NestedUnordered
+)
 
 import q2_stats
 from q2_stats.hypotheses import mann_whitney_u, wilcoxon_srt
@@ -22,9 +23,6 @@ from q2_stats.deprecated.alpha_group_significance import (
     alpha_group_significance, prep_alpha_distribution)
 from q2_stats.meta.facet import collate_stats, facet_across, facet_within
 from q2_stats.plots import plot_rainclouds
-from q2_stats.types import (StatsTable, Pairwise, Dist1D, Multi,
-                            Matched, Independent, Ordered, NestedOrdered,
-                            Unordered, NestedUnordered)
 import q2_stats.examples as ex
 
 
@@ -357,6 +355,3 @@ plugin.pipelines.register_function(
             ex.alpha_group_significance_faith_pd
     }
 )
-
-# Load type half of the plugin
-importlib.import_module('q2_stats.types._deferred_setup')

@@ -10,6 +10,7 @@ import pandas as pd
 
 from qiime2.plugin.testing import TestPluginBase
 from qiime2.plugin.util import transform
+import qiime2
 
 from .. import TabularDataResourceDirFmt, TableJSONLFileFormat
 
@@ -59,3 +60,11 @@ class TestTransformers(TestPluginBase):
 
     def test_jsonl_roundtrip_timedist(self):
         self._assert_jsonl_roundtrip('faithpd_timedist.table.jsonl')
+
+    def test_jsonl_to_metadata(self):
+        _, obs = self.transform_format(TableJSONLFileFormat, qiime2.Metadata,
+                                       'faithpd_refdist.table.jsonl')
+        _, exp = self.transform_format(TableJSONLFileFormat, pd.DataFrame,
+                                       'faithpd_refdist.table.jsonl')
+        exp = exp.set_index('id')
+        pd.testing.assert_frame_equal(obs.to_dataframe(), exp)

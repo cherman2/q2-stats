@@ -23,8 +23,8 @@ requirements:
   - jinja2
   - frictionless<=5.5.0
   - statsmodels
-  - qiime2 {{ qiime2_epoch }}.*
-  - q2-types {{ qiime2_epoch }}.*
+  - qiime2 >={{ qiime2 }}
+  - q2-types >={{ q2_types }}
 test:
   requires:
   - qiime2 >={{ qiime2 }}
